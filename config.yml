@@ -1,0 +1,6 @@
+app:
+  name: go-data-pipeline
+
+environment:
+  production: false
+  seed_db: true
