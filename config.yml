@@ -4,3 +4,13 @@ app:
 environment:
   production: false
   seed_db: true
+
+app_db:
+  host: localhost
+  port: 9999
+  user: root
+  password: root
+
+db_watcher:
+  schema: app_db
+  table: user

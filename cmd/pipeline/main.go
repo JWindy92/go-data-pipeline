@@ -1,32 +1,19 @@
 package main
 
+// will subscribe to kafka topic and grab records from the db's accordingly
+
 import (
 	"fmt"
 
-	"github.com/spf13/viper"
+	c "github.com/JWindy92/go-data-pipeline/config"
 )
 
 func main() {
 
-	viper.SetConfigName("config")
-	viper.AddConfigPath(".")
-	viper.AutomaticEnv()
-	viper.SetConfigType("yml")
+	config := c.LoadConfig()
 
-	var config c.Config
-
-	if err := viper.ReadInConfig(); err != nil {
-		fmt.Printf("Error reading config file, %s", err)
-	}
-
-	viper.SetDefault("app.name", "default app name")
-
-	err := viper.Unmarshal(&config)
-	if err != nil {
-		fmt.Printf("Unable to decode config into struct, %v", err)
-	}
-
-	fmt.Printf("Starting %s", config.App.Name)
-	fmt.Printf("Production: %s", config.Environment.Production)
-	fmt.Printf("Seed DB: %s", config.Environment.SeedDb)
+	fmt.Printf("Starting %s\n", config.App.Name)
+	fmt.Printf("Production: %v\n", config.Environment.Production)
+	fmt.Printf("Seed DB: %v\n", config.Environment.SeedDb)
+	fmt.Printf(config.AppDb.Host)
 }
