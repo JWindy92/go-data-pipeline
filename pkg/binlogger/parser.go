@@ -114,10 +114,7 @@ func (m *BinlogParser) floatHelper(e *canal.RowsEvent, n int, columnName string)
 func (m *BinlogParser) boolHelper(e *canal.RowsEvent, n int, columnName string) bool {
 
 	val := m.intHelper(e, n, columnName)
-	if val == 1 {
-		return true
-	}
-	return false
+	return val == 1
 }
 
 func (m *BinlogParser) stringHelper(e *canal.RowsEvent, n int, columnName string) string {
@@ -130,7 +127,6 @@ func (m *BinlogParser) stringHelper(e *canal.RowsEvent, n int, columnName string
 			return ""
 		}
 		if e.Rows[n][columnId] == nil {
-			//Если в енум лежит нуул ставим пустую строку
 			return ""
 		}
 
